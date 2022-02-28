@@ -1,14 +1,10 @@
-import java.time.LocalTime;
-
 public class Locker {
     private int lockerId;
-    private int lockerPin;
-    LocalTime timeStamp;
+    private String lockerPin;
 
-    public Locker(int lockerId, int lockerPin, LocalTime timeStamp) {
+    public Locker(int lockerId, String lockerPin) {
         this.lockerId = lockerId;
         this.lockerPin = lockerPin;
-        this.timeStamp = timeStamp;
     }
 
     public int getLockerId() {
@@ -19,20 +15,12 @@ public class Locker {
         this.lockerId = lockerId;
     }
 
-    public int getLockerPin() {
+    public String getLockerPin() {
         return lockerPin;
     }
 
-    public void setLockerPin(int lockerPin) {
+    public void setLockerPin(String lockerPin) {
         this.lockerPin = lockerPin;
-    }
-
-    public LocalTime getTimeStamp() {
-        return timeStamp;
-    }
-
-    public void setTimeStamp(LocalTime timeStamp) {
-        this.timeStamp = timeStamp;
     }
 
     @Override
@@ -43,15 +31,13 @@ public class Locker {
         Locker locker = (Locker) o;
 
         if (lockerId != locker.lockerId) return false;
-        if (lockerPin != locker.lockerPin) return false;
-        return timeStamp.equals(locker.timeStamp);
+        return lockerPin.equals(locker.lockerPin);
     }
 
     @Override
     public int hashCode() {
         int result = lockerId;
-        result = 31 * result + lockerPin;
-        result = 31 * result + timeStamp.hashCode();
+        result = 31 * result + lockerPin.hashCode();
         return result;
     }
 
@@ -60,7 +46,6 @@ public class Locker {
         return "Locker{" +
                 "locker number = " + lockerId +
                 ", locker PIN = " + lockerPin +
-                ", Time = " + timeStamp +
                 '}';
     }
 }

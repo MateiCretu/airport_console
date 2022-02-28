@@ -1,16 +1,22 @@
-import java.util.Set;
-import java.util.TreeSet;
+import java.time.LocalDateTime;
+import java.util.*;
 
 public class Application {
-    public static void main(String[] args) {
-        Set<Integer> lockers = new TreeSet<>();
+    public static void main(String[] args) throws InterruptedException {
+        Scanner inputUser = new Scanner(System.in);
+        Set<Integer> lockersAvailable = new TreeSet<>();
         for (int n = 0, m = 1; n < 100; n++, m++) {
-            lockers.add(m);
+            lockersAvailable.add(m);
         }
-        System.out.println("Hello!" +
-                "\nIn order to select a locker please enter 1." +
-                "\nIn order to free up a locker enter 2." +
-                "\nTo exit press 0!");
-
+        Map<Integer, LocalDateTime> lockersTimeMap = new HashMap<>();
+        String pin = "0000";
+        int choice;
+        do {
+            choice = inputUser.nextInt();
+        } while (choice == 1 || choice == 2 || choice == 0);
     }
+
+
+
+
 }
