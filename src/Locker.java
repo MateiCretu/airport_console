@@ -2,6 +2,9 @@ public class Locker {
     private int lockerId;
     private String lockerPin;
 
+    public Locker() {
+    }
+
     public Locker(int lockerId, String lockerPin) {
         this.lockerId = lockerId;
         this.lockerPin = lockerPin;
