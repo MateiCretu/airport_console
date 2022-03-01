@@ -44,7 +44,7 @@ public class Application {
                     System.out.println("Please enter your pin:");
                     String pinByUser = inputUser.next();
                     if (pinByUser.equals(lockersIdPinMap.get(idByUser))) {
-                        long time = user.spentTime(LocalDateTime.now(), lockersTimeMap.get(locker.getLockerId()));
+                        long time = user.spentTime(LocalDateTime.now(), lockersTimeMap.get(idByUser));
                         System.out.println("You occupied the locker for: " + time + " minutes.");
                         user.payment(time);
                     }
