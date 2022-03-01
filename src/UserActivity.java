@@ -20,9 +20,10 @@ public class UserActivity {
 
 
     //method to calculate payment
-    public void payment(long timeSpent) {
-        int sumToPay = (int) (10 + timeSpent / 60 * 5);
+    public int payment(long timeSpent) {
+        int sumToPay = (int) (10 + (timeSpent - 60) / 60 * 5);
         System.out.println("You must pay: " + sumToPay + " RON.");
+        return sumToPay;
     }
 
 }
