@@ -36,6 +36,7 @@ public class Application {
                 lockersIdPinMap.put(locker.getLockerId(), locker.getLockerPin());
                 System.out.println("Your locker is: " + locker + "reserved at " + lockersTimeMap.get(locker.getLockerId()) + " local time.");
             }
+
             if (optToLockers == 2) {
 
                 System.out.println("Please enter your locker number:");

@@ -25,9 +25,4 @@ public class UserActivity {
         System.out.println("You must pay: " + sumToPay + " RON.");
     }
 
-    public static void main(String[] args) {
-        UserActivity user = new UserActivity();
-        user.payment(59);
-    }
-
 }
