@@ -15,19 +15,6 @@ class UserActivityTest {
     }
 
     @Test
-    void userLockerId() {
-
-        activity.userLockerId(locker, 100);
-        assertEquals(100, locker.getLockerId());
-    }
-
-    @Test
-    void userLockerPin() {
-        activity.userLockerPin(locker, "1204");
-        assertEquals("1204", locker.getLockerPin());
-    }
-
-    @Test
     void spentTime() {
     }
 

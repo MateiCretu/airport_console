@@ -14,21 +14,27 @@ public class DbConnectionManager {
         Statement statement = conn.createStatement();
         ResultSet resultSet = statement.executeQuery(sql);
         while (resultSet.next()) {
-            int id = resultSet.getInt("ID");
-
-            int lockerNo = resultSet.getInt("LockerNO");
+/*            int id = resultSet.getInt("ID");
+            int lockerNo = resultSet.getInt("LockerNO");*/
             String pin = resultSet.getString("LockerPIN");
             String entry = resultSet.getString("EntryTime");
             String exit = resultSet.getString("ExitTime");
             int time = resultSet.getInt("SpentTime");
             int pay = resultSet.getInt("Payment");
+            resultSet.getInt("ID");
+            resultSet.getInt("LockerNO");
+/*            resultSet.getString("LockerPIN");
+            resultSet.getString("EntryTime");
+            resultSet.getString("ExitTime");
+            resultSet.getInt("SpentTime");
+            resultSet.getInt("Payment");*/
 
 
-            System.out.println("id: " + id + " locker: " + lockerNo + " pin: " + pin +
+            System.out.println("id: " + resultSet.getInt("ID") + " locker: " + resultSet.getInt("LockerNO") + " pin: " + pin +
                     " entry: " + entry + " exit: " + exit + " time: " + time +
                     " pay: " + pay);
         }
-
+        conn.close();
 
     }
 }

@@ -36,9 +36,7 @@ values (1,'1234','2022-03-01T22.00.00','2022-03-01T23.00.00',60,10);]]></console
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files>
-      <object connection-id="25f9423e-4c4b-4e31-a223-8edc7dd5171d" object-ref="consoles/Connection" />
-    </open-files>
+    <open-files />
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="25f9423e-4c4b-4e31-a223-8edc7dd5171d" />
