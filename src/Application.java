@@ -19,11 +19,15 @@ public class Application {
 
         int optToLockers;
         do {
-            System.out.println("Hello!" + "\nIn order to choose a locker, please press 1." + "\nIn order to free-up a locker, please press 2.");
+            System.out.println(
+                    "Hello!" +
+                            "\nIn order to choose a locker, please press 1." +
+                            "\nIn order to free-up a locker, please press 2." +
+                            "\nTo exit, press 0.");
 
             optToLockers = inputUser.nextInt();
 
-            while (optToLockers != 1 && optToLockers != 2) {
+            while (optToLockers != 1 && optToLockers != 2 && optToLockers != 0) {
                 System.out.println("Please enter a valid option");
                 optToLockers = inputUser.nextInt();
             }
@@ -85,6 +89,6 @@ public class Application {
                 lockersAvailable.add(idByUser);
             }
 
-        } while (optToLockers == 1 || optToLockers == 2 || optToLockers == 0);
+        } while (optToLockers != 0);
     }
 }
