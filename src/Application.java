@@ -80,6 +80,8 @@ public class Application {
                 System.out.println("You occupied the locker for: " + time + " minutes.");
 
                 user.payment(time);
+                locker.setLocked(false);
+                locker.setTime(null);
             }
 
         }
