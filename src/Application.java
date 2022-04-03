@@ -34,7 +34,7 @@ public class Application {
 
             if (optToLockers == 1) {
                 System.out.println("Please choose a locker from the list:");
-                System.out.println(lockersMap.values());
+                System.out.println(lockersMap.values().stream().filter(locker -> !locker.isLocked()).collect(Collectors::toList());
                 int lockerId = inputUser.nextInt();
 
                 while (!lockersMap.containsKey(lockerId) || lockersMap.get(lockerId).isLocked()) {
