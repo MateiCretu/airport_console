@@ -1,20 +1,19 @@
 import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.Scanner;
-import java.util.TreeMap;
+import java.util.HashMap;
 
 public class Application {
 
 
     public static void main(String[] args) {
         UserActivity user = new UserActivity();
-        Locker locker = null;
         Scanner inputUser = new Scanner(System.in);
 
-        Map<Integer, Object> lockersMap = new TreeMap<>();
+        Map<Integer, Locker> lockersMap = new HashMap<>();
 
         for (int lockerId = 1; lockerId <= 100; lockerId++) {
-            locker = new Locker(lockerId);
+            Locker locker = new Locker(lockerId);
             lockersMap.put(lockerId, locker);
         }
 
@@ -36,14 +35,13 @@ public class Application {
             if (optToLockers == 1) {
                 System.out.println("Please choose a locker from the list:");
                 System.out.println(lockersMap.values());
-                int userOption = inputUser.nextInt();
+                int lockerId = inputUser.nextInt();
 
-
-                while (!lockersMap.containsKey(userOption)) {
+                while (!lockersMap.containsKey(lockerId) || lockersMap.get(lockerId).isLocked()) {
                     System.out.println("Please choose an available locker!");
-                    userOption = inputUser.nextInt();
+                    lockerId = inputUser.nextInt();
                 }
-                locker = (Locker)lockersMap.getOrDefault(userOption, null);
+                Locker locker = lockersMap.get(lockerId);
                 locker.setLocked(true);
 
                 System.out.println("Please set up a 4 digit pin-code");
@@ -58,23 +56,21 @@ public class Application {
                 locker.setTime(LocalDateTime.now());
 
                 System.out.println("Your reserved " + locker + " at " + locker.getTime() + " local time.\n");
-
-                lockersMap.remove(locker.getLOCKER_ID());
             }
 
             else {
 
                 System.out.println("Please enter your locker number:");
-                int idByUser = inputUser.nextInt();
-                while (lockersMap.containsKey(idByUser)) {
+                int lockerId = inputUser.nextInt();
+                while (!lockersMap.containsKey(lockerId) || lockersMap.get(lockerId).isLocked()) {
                     System.out.println("Please enter correct locker number!");
-                    idByUser = inputUser.nextInt();
+                    lockerId = inputUser.nextInt();
                 }
 
                 System.out.println("Please enter your pin:");
                 String pinByUser = inputUser.next();
-
-                while (!pinByUser.equals(locker.getLockerPin()) && idByUser != locker.getLOCKER_ID()) {
+                Locker locker = lockersMap.get(lockerId);
+                while (!pinByUser.equals(locker.getLockerPin()) && !idByUser.equals(locker.getLockerId())) {
                     System.out.println("Please enter the correct PIN number!");
                     pinByUser = inputUser.next();
                 }
@@ -84,7 +80,6 @@ public class Application {
                 System.out.println("You occupied the locker for: " + time + " minutes.");
 
                 user.payment(time);
-                lockersMap.put(idByUser, new Locker(idByUser));
             }
 
         }
