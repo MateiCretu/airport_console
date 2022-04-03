@@ -1,21 +1,18 @@
+import java.time.LocalDateTime;
+import java.util.Objects;
+
 public class Locker {
-    private int lockerId;
+    private final int LOCKER_ID;
     private String lockerPin;
+    private boolean locked;
+    private LocalDateTime time;
 
-    public Locker() {
+    public Locker(int LOCKER_ID) {
+        this.LOCKER_ID = LOCKER_ID;
     }
 
-    public Locker(int lockerId, String lockerPin) {
-        this.lockerId = lockerId;
-        this.lockerPin = lockerPin;
-    }
-
-    public int getLockerId() {
-        return lockerId;
-    }
-
-    public void setLockerId(int lockerId) {
-        this.lockerId = lockerId;
+    public int getLOCKER_ID() {
+        return LOCKER_ID;
     }
 
     public String getLockerPin() {
@@ -26,29 +23,47 @@ public class Locker {
         this.lockerPin = lockerPin;
     }
 
+    public boolean isLocked() {
+        return locked;
+    }
+
+    public void setLocked(boolean locked) {
+        this.locked = locked;
+    }
+
+    public LocalDateTime getTime() {
+        return time;
+    }
+
+    public void setTime(LocalDateTime time) {
+        this.time = time;
+    }
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Locker locker = (Locker) o;
+        Locker locker = (Locker)o;
 
-        if (lockerId != locker.lockerId) return false;
-        return lockerPin.equals(locker.lockerPin);
+        if (LOCKER_ID != locker.LOCKER_ID) return false;
+        if (locked != locker.locked) return false;
+        if (!Objects.equals(lockerPin, locker.lockerPin)) return false;
+        return Objects.equals(time, locker.time);
     }
 
     @Override
     public int hashCode() {
-        int result = lockerId;
-        result = 31 * result + lockerPin.hashCode();
+        int result = LOCKER_ID;
+        result = 31 * result + (lockerPin != null ? lockerPin.hashCode() : 0);
+        result = 31 * result + (locked ? 1 : 0);
+        result = 31 * result + (time != null ? time.hashCode() : 0);
         return result;
     }
 
     @Override
     public String toString() {
-        return "Locker{" +
-                "locker number = " + lockerId +
-                ", locker PIN = " + lockerPin +
-                '}';
+        return "Locker " + LOCKER_ID;
     }
 }

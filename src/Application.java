@@ -1,21 +1,22 @@
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.Map;
+import java.util.Scanner;
+import java.util.TreeMap;
 
 public class Application {
+
+
     public static void main(String[] args) {
-
         UserActivity user = new UserActivity();
-        Locker locker = new Locker();
-
+        Locker locker = null;
         Scanner inputUser = new Scanner(System.in);
 
-        Set<Integer> lockersAvailable = new TreeSet<>();
-        for (int n = 0, m = 1; n < 100; n++, m++) {
-            lockersAvailable.add(m);
-        }
-        Map<Integer, String> lockersIdPinMap = new HashMap<>();
-        Map<Integer, LocalDateTime> lockersTimeMap = new HashMap<>();
+        Map<Integer, Object> lockersMap = new TreeMap<>();
 
+        for (int lockerId = 1; lockerId <= 100; lockerId++) {
+            locker = new Locker(lockerId);
+            lockersMap.put(lockerId, locker);
+        }
 
         int optToLockers;
         do {
@@ -34,16 +35,16 @@ public class Application {
 
             if (optToLockers == 1) {
                 System.out.println("Please choose a locker from the list:");
-                System.out.println(lockersAvailable);
+                System.out.println(lockersMap.values());
+                int userOption = inputUser.nextInt();
 
-                locker.setLockerId(inputUser.nextInt());
 
-                while (!lockersAvailable.contains(locker.getLockerId())) {
-                    System.out.println("Please choose a free locker!");
-                    locker.setLockerId(inputUser.nextInt());
+                while (!lockersMap.containsKey(userOption)) {
+                    System.out.println("Please choose an available locker!");
+                    userOption = inputUser.nextInt();
                 }
-
-                lockersAvailable.remove(locker.getLockerId());
+                locker = (Locker)lockersMap.getOrDefault(userOption, null);
+                locker.setLocked(true);
 
                 System.out.println("Please set up a 4 digit pin-code");
 
@@ -54,18 +55,18 @@ public class Application {
                     locker.setLockerPin(inputUser.next());
                 }
 
-                lockersTimeMap.put(locker.getLockerId(), LocalDateTime.now());
-                lockersIdPinMap.put(locker.getLockerId(), locker.getLockerPin());
+                locker.setTime(LocalDateTime.now());
 
-                System.out.println("Your reserved your locker at " + lockersTimeMap.get(locker.getLockerId()) + " local time.\n");
+                System.out.println("Your reserved " + locker + " at " + locker.getTime() + " local time.\n");
+
+                lockersMap.remove(locker.getLOCKER_ID());
             }
 
-            if (optToLockers == 2) {
+            else {
 
                 System.out.println("Please enter your locker number:");
                 int idByUser = inputUser.nextInt();
-
-                while (!lockersIdPinMap.containsKey(idByUser)) {
+                while (lockersMap.containsKey(idByUser)) {
                     System.out.println("Please enter correct locker number!");
                     idByUser = inputUser.nextInt();
                 }
@@ -73,22 +74,23 @@ public class Application {
                 System.out.println("Please enter your pin:");
                 String pinByUser = inputUser.next();
 
-                while (!pinByUser.equals(lockersIdPinMap.get(idByUser))) {
+                while (!pinByUser.equals(locker.getLockerPin()) && idByUser != locker.getLOCKER_ID()) {
                     System.out.println("Please enter the correct PIN number!");
                     pinByUser = inputUser.next();
                 }
 
-                long time = user.spentTime(LocalDateTime.now(), lockersTimeMap.get(idByUser));
+                long time = user.spentTime(LocalDateTime.now(), locker.getTime());
 
                 System.out.println("You occupied the locker for: " + time + " minutes.");
 
                 user.payment(time);
-
-                lockersIdPinMap.remove(idByUser);
-                lockersTimeMap.remove(idByUser);
-                lockersAvailable.add(idByUser);
+                lockersMap.put(idByUser, new Locker(idByUser));
             }
 
-        } while (optToLockers != 0);
+        }
+        while (optToLockers != 0);
+
+
     }
+
 }
