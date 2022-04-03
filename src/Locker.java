@@ -2,17 +2,17 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class Locker {
-    private final int LOCKER_ID;
+    private final int lockerId;
     private String lockerPin;
     private boolean locked;
     private LocalDateTime time;
 
-    public Locker(int LOCKER_ID) {
-        this.LOCKER_ID = LOCKER_ID;
+    public Locker(int lockerId) {
+        this.lockerId = lockerId;
     }
 
-    public int getLOCKER_ID() {
-        return LOCKER_ID;
+    public int getLockerId() {
+        return lockerId;
     }
 
     public String getLockerPin() {
@@ -47,7 +47,7 @@ public class Locker {
 
         Locker locker = (Locker)o;
 
-        if (LOCKER_ID != locker.LOCKER_ID) return false;
+        if (lockerId != locker.lockerId) return false;
         if (locked != locker.locked) return false;
         if (!Objects.equals(lockerPin, locker.lockerPin)) return false;
         return Objects.equals(time, locker.time);
@@ -55,7 +55,7 @@ public class Locker {
 
     @Override
     public int hashCode() {
-        int result = LOCKER_ID;
+        int result = lockerId;
         result = 31 * result + (lockerPin != null ? lockerPin.hashCode() : 0);
         result = 31 * result + (locked ? 1 : 0);
         result = 31 * result + (time != null ? time.hashCode() : 0);
@@ -64,6 +64,6 @@ public class Locker {
 
     @Override
     public String toString() {
-        return "Locker " + LOCKER_ID;
+        return "Locker " + lockerId;
     }
 }
